@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:replace="shared/header :: header('')"></div>
+    <div class="container">
+        <h1>Oh no something went wrong</h1>
+        <div sec:authorize="hasAnyRole('ROLE_ADMIN')" >
+            Wiadomość: <span th:text="${message}"></span></br>
+            Wyjątek: <span th:text="${exception}"></span></br>
+
+            StackTrace: <span th:text="${stackTrace}"></span>
+        </div>
+    </div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>

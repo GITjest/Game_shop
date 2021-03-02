@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Roles</title>
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:replace="shared/header :: header('role')"></div>
+<div class="container">
+    <h1 th:text="#{role}">Roles</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th th:text="#{user.userName}">User name</th>
+            <th th:text="#{user.email}">Email</th>
+            <th th:text="#{role}">Roles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user, itemStat : ${users}">
+            <td th:text="${user.userName}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <select class="form-control" onchange="location = this.value;">
+                    <option th:text="${user.role.role}" th:value="${'/role/set?id=' + user.userId + '&rid=' + user.role.roleId}" selected></option>
+                    <option th:each="role: ${roles}" th:if="${role.roleId != user.role.roleId}" th:value="${'/role/set?id=' + user.userId + '&rid=' + role.roleId}" th:text="${role.role}"></option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+
+</html>
+

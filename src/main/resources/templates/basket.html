@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Basket</title>
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:replace="shared/header :: header('basket')"></div>
+<div class="container">
+    <h1 th:text="#{basket}">Basket</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th th:text="#{game.title}">Title</th>
+                    <th th:text="#{game.price}">Price</th>
+                    <th th:text="#{order.endDate}">Date added</th>
+                    <th th:text="#{action}">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="o : ${orders}">
+                    <td><a th:href="@{/game/{id}(id = ${o.game.gameId})}" th:text="${o.game.title}"></a></td>
+                    <td>
+                        <div th:if="${o.game.discount?.startDate < currentDate && o.game.discount?.endDate > currentDate}">
+                            <span th:text="${#numbers.formatCurrency(o.game.price - (o.game.price * (o.game.discount.value * 0.01)))}"></span>
+                            <span th:text="${#numbers.formatCurrency(o.game.price)}" style="text-decoration: line-through"></span>
+                            (-[[${o.game.discount.value}]]%)
+                            [[${o.game.discount.endDate}]]
+                        </div>
+                        <div th:unless="${o.game?.discount?.startDate < currentDate && o.game?.discount?.endDate > currentDate}">
+                            <span th:text="${#numbers.formatCurrency(o.game.price)}"></span>
+                        </div>
+                    </td>
+                    <td th:text="${o.endDate}"></td>
+                    <td><a class="btn btn-danger" th:href="@{/basket/delete(id=${o.orderId})}" th:text="#{delete}">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    <a class="btn btn-success" th:href="@{basket/buy}" th:text="#{buy}">Buy</a>
+</div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+
+</html>
+
