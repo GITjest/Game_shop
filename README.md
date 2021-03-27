@@ -16,9 +16,10 @@
 * Spring-boot - 2.2.3
 * Spring-security - 5.2.1
 * Spring-data-jpa - 2.2.3
+* Hibernate - 5.4.10
 * Thymeleaf - 3.0.11
 * Bootstrap - 4.6.0
-* Jquery - 3.5.1
+* JQuery - 3.5.1
 * Maven
 * MySQL
 
