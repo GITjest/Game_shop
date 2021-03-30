@@ -1,10 +1,12 @@
 package com.example.demo.service;
 
+import com.example.demo.model.RolesEntity;
 import com.example.demo.model.UsersEntity;
 import com.example.demo.repository.UsersRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -23,6 +25,12 @@ public class UsersService {
 
     public void save(UsersEntity user) {
         repo.save(user);
+    }
+
+    public UsersEntity registerUser(UsersEntity user, RolesEntity role) {
+        user.setRegistrationDate(new Timestamp(System.currentTimeMillis()));
+        user.setRole(role);
+        return repo.save(user);
     }
 
     public UsersEntity find(String userName) {

@@ -40,10 +40,7 @@ public class RegistrationController {
         if (bindingResult.hasErrors()) {
             return "registrationForm";
         }
-
-        user.setRegistrationDate(new Timestamp(System.currentTimeMillis()));
-        user.setRole(rolesService.findByRole("USER"));
-        usersService.save(user);
+        usersService.registerUser(user, rolesService.findByRole("USER"));
         return "redirect:/login";
     }
 }

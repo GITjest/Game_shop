@@ -19,6 +19,15 @@ public class UsersEntity {
     private Collection<OrdersEntity> orders;
     private Collection<ReviewsEntity> reviews;
 
+    public UsersEntity() {
+    }
+
+    public UsersEntity(String userName, String password, String email) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")

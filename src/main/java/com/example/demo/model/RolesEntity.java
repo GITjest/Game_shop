@@ -12,6 +12,13 @@ public class RolesEntity {
     private String role;
     private Collection<UsersEntity> users;
 
+    public RolesEntity() {
+    }
+
+    public RolesEntity(String role) {
+        this.role = role;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
