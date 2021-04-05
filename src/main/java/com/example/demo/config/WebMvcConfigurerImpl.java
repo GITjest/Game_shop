@@ -16,6 +16,7 @@ import java.util.Locale;
 
 @Configuration
 public class WebMvcConfigurerImpl implements WebMvcConfigurer {
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("loginForm");

@@ -13,7 +13,7 @@
 <body>
 <div th:replace="shared/header :: header('home')"></div>
 <div class="container col-4 my-4">
-    <form th:method="POST" th:action="@{/registration}" th:object="${usersEntity}">
+    <form th:method="POST" th:action="@{/registration}" th:object="${user}">
         <div class="form-group">
             <label for="username" th:text="#{user.userName}">User name</label>
             <input id="username" type="text" th:field="*{userName}" class="form-control" th:placeholder="#{user.userName}" required/>

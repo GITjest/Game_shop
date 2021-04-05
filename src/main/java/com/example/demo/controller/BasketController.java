@@ -5,6 +5,7 @@ import com.example.demo.model.UsersEntity;
 import com.example.demo.service.GamesService;
 import com.example.demo.service.OrdersService;
 import com.example.demo.service.UsersService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class BasketController {
         this.gamesService = gamesService;
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER"})
     @RequestMapping("/basket")
     public String basket(Model model, Principal principal){
         UsersEntity user = usersService.find(principal.getName());
@@ -36,18 +38,21 @@ public class BasketController {
         return "basket";
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER"})
     @GetMapping(value="/basket/delete", params = {"id"})
     public String deleteGameFromOrder(int id){
         ordersService.delete(id);
         return "redirect:/basket";
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER"})
     @GetMapping("/basket/buy")
     public String buy(Principal principal){
         ordersService.delete(usersService.find(principal.getName()));
         return "redirect:/basket";
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER"})
     @GetMapping(value="/basket/add", params = {"id"})
     public String deleteGameToOrder(int id, Principal principal){
         OrdersEntity order = new OrdersEntity();

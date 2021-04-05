@@ -36,7 +36,7 @@ public class GamesEntity {
 
     @Basic
     @Column(name = "title")
-    @NotBlank
+    @NotEmpty
     @Size(min = 1, max = 100)
     public String getTitle() {
         return title;
