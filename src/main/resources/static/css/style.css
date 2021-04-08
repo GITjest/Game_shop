@@ -1,0 +1,10 @@
+.country-flag {
+    cursor: pointer;
+    width: 32px;
+    height: 24px;
+    padding: 2px;
+}
+
+#logout {
+    display: none;
+}
